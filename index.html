@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IP Adresinizi Öğrenin</title>
+  <title>IP ve Ağ Bilgileriniz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-  <h1>IP Adresinizi Öğrenin</h1>
+  <h1>IP ve Ağ Bilgileriniz</h1>
   <p id="ip">IP adresiniz alınıyor...</p>
+  <p id="network">Ağ bilgileri yükleniyor...</p>
+
   <script>
-    fetch('https://api.ipify.org?format=json')
+    // API tokenınızı buraya yazın (ipinfo.io'dan aldığınız)
+    const token = "845ac2448a47ab"; 
+
+    // API'yi çağır
+    fetch(`https://ipinfo.io/json?token=${token}`)
       .then(response => response.json())
       .then(data => {
-        document.getElementById('ip').innerText = "IP Adresiniz: " + data.ip;
+        // Bilgileri göstermek için HTML öğelerini doldurun
+        document.getElementById('ip').innerText = `IP Adresiniz: ${data.ip}`;
+        document.getElementById('network').innerText = 
+          `Şehir: ${data.city}, Ülke: ${data.country}, ISP: ${data.org}`;
+      })
+      .catch(error => {
+        console.error('API hatası:', error);
+        document.getElementById('network').innerText = "Ağ bilgileri alınamadı.";
       });
   </script>
 </body>
-</html>
+</html> 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IP Adresinizi Öğrenin</title>
+</head>
+<body>
+  <h1>IP Adresinizi Öğrenin</h1>
+  <p id="ip">IP adresiniz alınıyor...</p>
+  <script>
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('ip').innerText = "IP Adresiniz: " + data.ip;
+      });
+  </script>
+</body>
+</html>
